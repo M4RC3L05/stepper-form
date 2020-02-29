@@ -1,3 +1,8 @@
+/**
+ *
+ * App state
+ *
+ */
 const state = {
     currStep: 0,
     totalSteps: 3,
@@ -5,6 +10,11 @@ const state = {
     transitionTimeout: undefined
 };
 
+/**
+ *
+ * DOM elements cache
+ *
+ */
 const DOM = {
     stepper_form: document.querySelector(".stepper_form"),
     steps: Array.from(document.querySelector(".stepper_form").children)
@@ -16,7 +26,7 @@ const DOM = {
  * sets up next stage event listeners and bootstraps the stage
  * transition
  *
- * @param {Number} nextStage the next stage position to nativate
+ * @param {Number} nextStage The next stage position to nativate
  *
  */
 function onNavigate(nextStage) {
@@ -92,7 +102,7 @@ function performStepTransition(previousStage, nextStage, shouldDefer = true) {
  *
  * Clears all event listeners from stage
  *
- * @param {HTMLElement} stage the stage dom element
+ * @param {HTMLElement} stage The stage dom element
  *
  */
 function unbindEventsFromStage(stage) {
@@ -113,7 +123,7 @@ function unbindEventsFromStage(stage) {
  *
  * Sets up all event listeners for the stage
  *
- * @param {HTMLElement} stage the stage dom element
+ * @param {HTMLElement} stage The stage dom element
  *
  */
 function bindEventsForStage(stage) {
