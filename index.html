@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Stepper Form</title>
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <div class="stepper_form">
+            <div class="stepper_form__stage">
+                <div class="stepper_form__content">
+                    <h1>Your name</h1>
+                    <input type="text" />
+                </div>
+                <div class="stepper_form__actions">
+                    <button
+                        class="stepper_form__action stepper_form__action--next"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+            <div class="stepper_form__stage">
+                <div class="stepper_form__content">
+                    <h1>Your email</h1>
+                    <input type="email" />
+                </div>
+                <div class="stepper_form__actions">
+                    <button
+                        class="stepper_form__action stepper_form__action--previous"
+                    >
+                        Previous
+                    </button>
+                    <button
+                        class="stepper_form__action stepper_form__action--next"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+            <div class="stepper_form__stage">
+                <div class="stepper_form__content">
+                    <h1>All set 🎉🎉🎉!!!</h1>
+                    <p>Thank you.</p>
+                </div>
+                <div class="stepper_form__actions">
+                    <button
+                        class="stepper_form__action stepper_form__action--done"
+                    >
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script src="./app.js"></script>
+    </body>
+</html>

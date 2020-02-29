@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700&display=swap");
+
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Comfortaa", sans-serif;
+}
+
+body {
+    padding: 10px;
+    background: linear-gradient(to top, #be1fad, #e88b24);
+}
+
+.stepper_form {
+    position: relative;
+    min-width: 500px;
+    height: 300px;
+    background: transparent;
+    padding: 20px;
+}
+
+.stepper_form__stage {
+    opacity: 0;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+    overflow: hidden;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    transform: translateX(-50%);
+    border: 1px solid #ebebeb;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.35s ease-in-out;
+}
+
+.stepper_form__content {
+    flex: 1;
+    padding: 20px;
+}
+
+.stepper_form__content h1 {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 15px;
+}
+
+.stepper_form__content input {
+    width: 100%;
+    font-size: 18px;
+    padding: 5px;
+    font-family: "Comfortaa", sans-serif;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.stepper_form__stage.show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.stepper_form__actions {
+    padding: 20px;
+}
+
+.stepper_form__actions .stepper_form__action {
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Comfortaa", sans-serif;
+    padding: 5px 15px;
+}
+
+.stepper_form__actions .stepper_form__action.stepper_form__action--next {
+    border: 2px solid #1992fd;
+    color: #1992fd;
+}
+.stepper_form__actions .stepper_form__action.stepper_form__action--previous {
+    border: 2px solid #fd6a00;
+    color: #fd6a00;
+}
+.stepper_form__actions .stepper_form__action.stepper_form__action--done {
+    border: 2px solid #1ee2a4;
+    color: #1ee2a4;
+}
