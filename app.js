@@ -10,11 +10,20 @@ const DOM = {
     steps: Array.from(document.querySelector(".stepper_form").children)
 };
 
-function onNavigate(newStep) {
-    if (newStep < 0 || newStep >= state.totalSteps) return;
+/**
+ *
+ * Updates the current step, clears previous step event listeners,
+ * sets up next step event listeners and bootstraps the stage
+ * transition
+ *
+ * @param {Number} nextStage the next stage position to nativate
+ *
+ */
+function onNavigate(nextStage) {
+    if (nextStage < 0 || nextStage >= state.totalSteps) return;
 
     let lastStep = state.currStep;
-    state.currStep = newStep;
+    state.currStep = nextStage;
 
     if (state.transitionTimeout) clearTimeout(state.transitionTimeout);
 
@@ -30,6 +39,62 @@ function onNavigate(newStep) {
     state.hasPeformStepTransition = true;
 }
 
+/**
+ *
+ * Navigates to the next stage
+ *
+ */
+function onStepNext() {
+    onNavigate(state.currStep + 1);
+}
+
+/**
+ *
+ * Navigates to the previous stage
+ *
+ */
+function onStepPrev() {
+    onNavigate(state.currStep - 1);
+}
+
+/**
+ *
+ * Navigates to the begining
+ *
+ */
+function onResetStep() {
+    onNavigate(0);
+}
+
+/**
+ *
+ * Performs the transition between stages.
+ *
+ * @param {HTMLElement} previousStage The previous stage dom element
+ * @param {HTMLElement} nextStage The next stage dom element
+ * @param {boolean} [shouldDefer] Indicates if the transitions between stages should have delay
+ *
+ */
+function performStepTransition(previousStage, nextStage, shouldDefer = true) {
+    hideStep(previousStage);
+
+    if (!shouldDefer) {
+        showStep(nextStage);
+        return;
+    }
+
+    state.transitionTimeout = setTimeout(() => {
+        showStep(nextStage);
+    }, 400);
+}
+
+/**
+ *
+ * Clears all event listeners from stage
+ *
+ * @param {HTMLElement} stage the stage dom element
+ *
+ */
 function unbindEventsFromStage(stage) {
     const previousBtn = getPreviousBtnFromStage(stage);
 
@@ -44,6 +109,13 @@ function unbindEventsFromStage(stage) {
     if (done) done.removeEventListener("click", onStepNext);
 }
 
+/**
+ *
+ * Sets up all event listeners for the stage
+ *
+ * @param {HTMLElement} stage the stage dom element
+ *
+ */
 function bindEventsForStage(stage) {
     const previousBtn = getPreviousBtnFromStage(stage);
 
@@ -58,51 +130,66 @@ function bindEventsForStage(stage) {
     if (done) done.addEventListener("click", onResetStep);
 }
 
-function getPreviousBtnFromStage(stage) {
-    return stage.querySelector("button.stepper_form__action--previous");
+/**
+ *
+ * Generic function to fetch a button fro a stage by the type
+ *
+ * @param {string} type The button type
+ * @returns {(stage: HTMLElement) => HTMLButtonElement}
+ *
+ */
+function getButtonFromStage(type) {
+    return stage => stage.querySelector(`button.stepper_form__action--${type}`);
 }
 
-function getAllDoneBtnFromStage(stage) {
-    return stage.querySelector("button.stepper_form__action--done");
+/**
+ *
+ * Gets the previous button from stage
+ *
+ * @type {(stage: HTMLElement) => HTMLButtonElement}
+ *
+ */
+const getPreviousBtnFromStage = getButtonFromStage("previous");
+/**
+ *
+ * Gets the previous button from stage
+ *
+ * @type {(stage: HTMLElement) => HTMLButtonElement}
+ *
+ */
+const getNextBtnFromStage = getButtonFromStage("next");
+/**
+ *
+ * Gets the previous button from stage
+ *
+ * @type {(stage: HTMLElement) => HTMLButtonElement}
+ *
+ */
+const getAllDoneBtnFromStage = getButtonFromStage("done");
+
+/**
+ *
+ * Hides a stage
+ *
+ * @param {HTMLElement} stage The stage dom element
+ *
+ */
+function hideStep(stage) {
+    stage.classList.remove("show");
 }
 
-function getNextBtnFromStage(stage) {
-    return stage.querySelector("button.stepper_form__action--next");
-}
-
-function onStepNext() {
-    onNavigate(state.currStep + 1);
-}
-
-function onStepPrev() {
-    onNavigate(state.currStep - 1);
-}
-
-function onResetStep() {
-    onNavigate(0);
-}
-
-function performStepTransition(currStep, nextStep, shouldDefere = true) {
-    hideStep(currStep);
-    if (shouldDefere)
-        state.transitionTimeout = setTimeout(() => {
-            showStep(nextStep);
-        }, 400);
-    else showStep(nextStep);
-}
-
-function hideStep(domStep) {
-    domStep.classList.remove("show");
-}
-
-function showStep(domStep) {
-    domStep.classList.add("show");
+/**
+ *
+ * Reveals a stage
+ *
+ * @param {HTMLElement} stage  The stage element
+ *
+ */
+function showStep(stage) {
+    stage.classList.add("show");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     state.totalSteps = DOM.steps.length;
     onNavigate(0);
-    DOM.steps[state.currStep]
-        .querySelector("button")
-        .addEventListener("click", e => console.log("jjj"));
 });
