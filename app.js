@@ -12,8 +12,8 @@ const DOM = {
 
 /**
  *
- * Updates the current step, clears previous step event listeners,
- * sets up next step event listeners and bootstraps the stage
+ * Updates the current step, clears previous stage event listeners,
+ * sets up next stage event listeners and bootstraps the stage
  * transition
  *
  * @param {Number} nextStage the next stage position to nativate
@@ -182,7 +182,7 @@ function hideStep(stage) {
  *
  * Reveals a stage
  *
- * @param {HTMLElement} stage  The stage element
+ * @param {HTMLElement} stage  The stage dom element
  *
  */
 function showStep(stage) {
