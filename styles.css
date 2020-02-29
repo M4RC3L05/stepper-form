@@ -34,12 +34,24 @@ body {
     padding: 20px;
 }
 
+.stepper_form__progress_indicator {
+    user-select: none;
+    position: absolute;
+    font-size: 72px;
+    bottom: 0px;
+    right: 20px;
+    font-weight: bold;
+    background: transparent;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.1);
+}
+
 .stepper_form__stage {
+    overflow: hidden;
     opacity: 0;
     top: 20px;
     left: 20px;
     position: absolute;
-    overflow: hidden;
     width: calc(100% - 40px);
     height: calc(100% - 40px);
     background: white;
